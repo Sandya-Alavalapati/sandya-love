@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    overflow: hidden;
+}
+
+/* Card */
+.card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+/* Button container */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff4d88;
+    color: white;
+}
+
+#noBtn {
+    background: white;
+    color: #333;
+    position: relative;
+}
+
+#message {
+    display: none;
+    margin-top: 25px;
+    font-size: 22px;
+    color: #ff1a75;
+}
+
+#loveBtn {
+    margin-top: 15px;
+    background: #ff4d88;
+    color: white;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Romantic Letter Overlay */
+#letterOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.5s ease;
+}
+
+.letter-box {
+    background: #fffaf0;
+    width: 420px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    font-family: 'Georgia', serif;
+    animation: scaleUp 0.4s ease;
+}
+
+.letter-box h2 {
+    color: #d6336c;
+    margin-bottom: 20px;
+}
+
+.letter-box p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.signature {
+    margin-top: 20px;
+    font-style: italic;
+    color: #d6336c;
+}
+
+.closeLetter {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff4d88;
+    color: white;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div id="proposalSection">
+        <div style="font-size:40px;">🐱 ❤️</div>
+        <h2>Rahul ❤️,<br>will you be my Valentine?</h2>
+
+        <div class="button-group">
+            <button id="yesBtn" class="btn">Yes 💕</button>
+            <button id="noBtn" class="btn">No 🙈</button>
+        </div>
+    </div>
+    <div id="message">
+        This is just the beginning of our forever 💕<br>
+        <button id="loveBtn" class="btn">click me ❤️</button>
+    </div>
+
+    <p style="font-size:12px;margin-top:15px;opacity:0.6;">
+        Some love stories don't allow "no"
+    </p>
+</div>
+
+<!-- Romantic Letter Template -->
+<div id="letterOverlay">
+    <div class="letter-box">
+        <h2>My Love ❤️</h2>
+
+        <p>
+        You found me in the quiet corners of my lowest days,
+        and you stood beside me in the sunlight of my happiest ones.
+        You didn’t just walk into my life —
+        you gently became part of it.
+        </p>
+
+        <p>
+        I never thought my heart would open this way,
+        never thought I would love someone so deeply, so naturally…
+        but then you happened.
+        </p>
+
+        <p>
+        It’s only been a year since we met,
+        yet it feels like I’ve known your soul for a lifetime.
+        With you, I don’t wear masks.
+        I don’t pretend.
+        I don’t hide.
+        I am simply… me.
+        </p>
+
+        <p>
+        Your laughter lifts the weight off my tired days.
+        Your silly words chase away my sadness.
+        Your care wraps around me like warmth on a cold night.
+        You feel like comfort.
+        You feel like home.
+        </p>
+
+        <p>
+        Loving you doesn’t feel forced —
+        it feels written.
+        Soft. Certain. Endless.
+        </p>
+
+        <p>
+        I love you with my whole heart —
+        in every moment, in every breath, in every quiet thought between us.
+        </p>
+
+        <p class="signature">
+        Forever yours,<br>
+        ❤️
+        </p>
+
+        <button class="closeLetter" onclick="closeLetter()">Close</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const message = document.getElementById("message");
+const loveBtn = document.getElementById("loveBtn");
+const letterOverlay = document.getElementById("letterOverlay");
+
+/* NO button runs away */
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* YES click */
+yesBtn.addEventListener("click", function() {
+
+    // Hide entire proposal section (emoji + question + buttons)
+    document.getElementById("proposalSection").style.display = "none";
+
+    // Show message
+    message.style.display = "block";
+
+    // Confetti
+    confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.6 }
+    });
+
+    // Floating hearts
+    for (let i = 0; i < 30; i++) {
+        createHeart();
+    }
+});
+
+
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0px";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}
+
+/* Open romantic letter */
+loveBtn.addEventListener("click", function() {
+    letterOverlay.style.display = "flex";
+});
+
+/* Close letter */
+function closeLetter() {
+    letterOverlay.style.display = "none";
+}
+</script>
+
+</body>
+</html>
